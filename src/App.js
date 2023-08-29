@@ -2,9 +2,14 @@ import "./App.css";
 import { useEffect } from "react";
 
 function App() {
-  var WebApp = window.Telegram.WebApp;
-
-  WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
+  useEffect(() => {
+    // Make sure window.Telegram.WebApp is defined before using it
+    if (window.Telegram && window.Telegram.WebApp) {
+      const WebApp = window.Telegram.WebApp;
+      const username = WebApp.WebAppUser.username;
+      WebApp.showAlert(`Добро пожаловать, @${username}.`);
+    }
+  }, []);
 
   return (
     <div className="App">
