@@ -1,19 +1,20 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [name, setName] = useState("");
   useEffect(() => {
     // Make sure window.Telegram.WebApp is defined before using it
     if (window.Telegram && window.Telegram.WebApp) {
       const WebApp = window.Telegram.WebApp;
-      const username = WebApp.WebAppUser.username;
-      WebApp.showAlert(`Добро пожаловать, @${username}.`);
+      setName(WebApp.WebAppUser.username);
+      WebApp.showAlert(`Добро пожаловать, @${name}.`);
     }
   }, []);
 
   return (
     <div className="App">
-      <button>Toggle</button>
+      <p>hi {name}</p>
     </div>
   );
 }
