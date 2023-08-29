@@ -1,25 +1,21 @@
-import './App.css';
-import {useEffect, useState} from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import "./App.css";
+
+const tg = window.Telegram.WebApp;
 
 function App() {
+  useEffect(() => {
+    tg.ready();
+  }, []);
 
-    const [messages, setMessages] = useState([]);
-
-    useEffect(() => {
-        // Настроить обработку входящих обновлений на вашем сервере.
-        // Этот пример использует axios, но вы можете использовать другие библиотеки.
-        const url = 'https://glitch.com/edit/#!/comfortable-efficacious-rubidium?path=package.json%3A21%3A26'; // Замените на ваш URL
-        axios.post(url).then(response => {
-            const newMessages = response.data.messages;
-            setMessages(newMessages);
-        });
-    }, []);
-    
-    console.log(messages)
-
+  const onClose = () => {
+    tg.close();
+  };
   return (
     <div className="App">
+      <p>ScheduleApp</p>
+
+      <button onClick={onClose}>Close</button>
     </div>
   );
 }
